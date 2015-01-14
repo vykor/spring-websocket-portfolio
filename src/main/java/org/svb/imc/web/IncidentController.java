@@ -27,13 +27,9 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.svb.imc.models.Incident;
-import org.svb.imc.models.Portfolio;
-import org.svb.imc.models.PortfolioPosition;
+import org.svb.imc.models.Message;
 import org.svb.imc.service.IncidentService;
 import org.svb.imc.service.MessageService;
-import org.svb.imc.service.PortfolioService;
-import org.svb.imc.service.Trade;
-import org.svb.imc.service.TradeService;
 
 
 @Controller
@@ -59,13 +55,27 @@ public class IncidentController {
 		return incidents;
 	}
 
-	@MessageMapping("/trade")
-	public void executeTrade(Trade trade, Principal principal) {
-		trade.setUsername(principal.getName());
-		logger.debug("Trade: " + trade);
-		this.tradeService.executeTrade(trade);
+	   @SubscribeMapping("/messages")
+	    public List<Message> getMessages() throws Exception {
+	        List<Message> messages = this.messageService.getAllMessages();
+	        logger.debug("Incidents: " + messages);
+	        return messages;
+	    }
+	   
+	@MessageMapping("/message")
+	public void receiveMessage(Message message, Principal principal) {
+		message.setUser(principal.getName());
+		logger.debug("Message from: " + message.getUser());
+		this.messageService.addMessage(message);
 	}
 
+	   @MessageMapping("/incident")
+	    public void receiveIncident(Incident incident, Principal principal) {
+	        incident.setUser(principal.getName());
+	        logger.debug("Incident from: " + incident.getUser());
+	        this.incidentService.addIncident(incident);
+	    }
+	   
 	@MessageExceptionHandler
 	@SendToUser("/queue/errors")
 	public String handleException(Throwable exception) {

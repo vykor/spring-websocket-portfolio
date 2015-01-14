@@ -34,6 +34,10 @@ public class Message {
         return this.user;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
     public String getTimestamp() {
         return this.timestamp;
     }

@@ -13,8 +13,8 @@ function ApplicationModel(stompClient) {
       console.log('Connected ' + frame);
       self.username(frame.headers['user-name']);
 
-      stompClient.subscribe("/app/positions", function(message) {
-        self.portfolio().loadPositions(JSON.parse(message.body));
+      stompClient.subscribe("/app/incidents", function(message) {
+        self.incidents().loadIncidents(JSON.parse(message.body));
       });
       stompClient.subscribe("/topic/price.stock.*", function(message) {
         self.portfolio().processQuote(JSON.parse(message.body));

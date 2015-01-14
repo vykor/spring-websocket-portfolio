@@ -18,4 +18,8 @@ public class IncidentService {
         Incident incident = new Incident(title, description, user);
         this.incidents.add(incident);
     }
+    
+    public void addIncident(Incident incident) {
+        this.incidents.add(incident);
+    }
 }

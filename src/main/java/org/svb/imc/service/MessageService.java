@@ -13,7 +13,6 @@ import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 //import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.svb.imc.models.Incident;
 import org.svb.imc.models.Message;
 
 
@@ -49,6 +48,10 @@ public class MessageService implements ApplicationListener<BrokerAvailabilityEve
 	}
 
     public void recieveMessage(Message message) {
+        messages.add(message);
+    }
+    
+    public void addMessage(Message message) {
         messages.add(message);
     }
     

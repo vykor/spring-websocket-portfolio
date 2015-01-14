@@ -82,7 +82,11 @@ public class Incident {
     public String getUser() {
         return this.user;
     }
-
+    
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
     public IncidentStatus getStatus() {
         return this.status;
     }
