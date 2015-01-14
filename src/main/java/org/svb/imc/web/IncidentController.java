@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.portfolio.web;
+package org.svb.imc.web;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,35 +25,38 @@ import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.samples.portfolio.Portfolio;
-import org.springframework.samples.portfolio.PortfolioPosition;
-import org.springframework.samples.portfolio.service.PortfolioService;
-import org.springframework.samples.portfolio.service.Trade;
-import org.springframework.samples.portfolio.service.TradeService;
 import org.springframework.stereotype.Controller;
+import org.svb.imc.models.Incident;
+import org.svb.imc.models.Portfolio;
+import org.svb.imc.models.PortfolioPosition;
+import org.svb.imc.service.IncidentService;
+import org.svb.imc.service.MessageService;
+import org.svb.imc.service.PortfolioService;
+import org.svb.imc.service.Trade;
+import org.svb.imc.service.TradeService;
 
 
 @Controller
-public class PortfolioController {
+public class IncidentController {
 
-	private static final Log logger = LogFactory.getLog(PortfolioController.class);
+	private static final Log logger = LogFactory.getLog(IncidentController.class);
 
-	private final PortfolioService portfolioService;
+	private final IncidentService incidentService;
 
-	private final TradeService tradeService;
+	private final MessageService messageService;
 
 
 	@Autowired
-	public PortfolioController(PortfolioService portfolioService, TradeService tradeService) {
-		this.portfolioService = portfolioService;
-		this.tradeService = tradeService;
+	public IncidentController(IncidentService incidentService, MessageService messageService) {
+		this.incidentService = incidentService;
+		this.messageService = messageService;
 	}
 
-	@SubscribeMapping("/positions")
-	public List<PortfolioPosition> getPositions(Principal principal) throws Exception {
-		logger.debug("Positions for " + principal.getName());
-		Portfolio portfolio = this.portfolioService.findPortfolio(principal.getName());
-		return portfolio.getPositions();
+	@SubscribeMapping("/incidents")
+	public List<Incident> getIncidents() throws Exception {
+		List<Incident> incidents = this.incidentService.getIncidents();
+        logger.debug("Incidents: " + incidents);
+		return incidents;
 	}
 
 	@MessageMapping("/trade")

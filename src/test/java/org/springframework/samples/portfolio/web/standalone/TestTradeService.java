@@ -16,8 +16,8 @@
 
 package org.springframework.samples.portfolio.web.standalone;
 
-import org.springframework.samples.portfolio.service.Trade;
-import org.springframework.samples.portfolio.service.TradeService;
+import org.svb.imc.service.Trade;
+import org.svb.imc.service.TradeService;
 
 import java.util.ArrayList;
 import java.util.List;

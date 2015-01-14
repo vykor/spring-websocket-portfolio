@@ -17,6 +17,7 @@
 package org.springframework.samples.portfolio.web.standalone;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.StaticApplicationContext;
@@ -30,12 +31,12 @@ import org.springframework.messaging.simp.annotation.support.SimpAnnotationMetho
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.samples.portfolio.service.PortfolioService;
-import org.springframework.samples.portfolio.service.PortfolioServiceImpl;
-import org.springframework.samples.portfolio.service.Trade;
-import org.springframework.samples.portfolio.web.PortfolioController;
 import org.springframework.samples.portfolio.web.support.TestPrincipal;
 import org.springframework.test.util.JsonPathExpectationsHelper;
+import org.svb.imc.service.PortfolioService;
+import org.svb.imc.service.PortfolioServiceImpl;
+import org.svb.imc.service.Trade;
+import org.svb.imc.web.PortfolioController;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;

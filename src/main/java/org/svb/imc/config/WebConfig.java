@@ -1,4 +1,4 @@
-package org.springframework.samples.portfolio.config;
+package org.svb.imc.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
